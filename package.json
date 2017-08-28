@@ -30,6 +30,6 @@
   "author": "Alex Casillas <alexvcasillas@gmail.com>",
   "homepage": "https://alexvcasillas.com",
   "license": "MIT",
-  "repository": "https://github.com/alexvcasillas/animated-styled-component",
+  "repository": "https://github.com/alexvcasillas/animated-styled-components",
   "keywords": ["react-component"]
 }
