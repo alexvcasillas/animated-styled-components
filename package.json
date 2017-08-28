@@ -1,7 +1,7 @@
 {
-  "name": "animated-styled-component",
-  "version": "1.0.0",
-  "description": "animated-styled-component React component",
+  "name": "animated-styled-components",
+  "version": "0.1.0",
+  "description": "React Animated Styled Components",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": ["css", "es", "lib", "umd"],

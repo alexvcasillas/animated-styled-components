@@ -1,16 +1,10 @@
-# animated-styled-component
+### Animated Styled Components
 
-[![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+React Animated Styled Components is a work in progress project that aims to make 
+ease to use plug and play animated components.
 
-Describe animated-styled-component here.
+### Installing Animated Styled Components
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/user/repo
+`npm i animated-styled-components`
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
-
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
+_Work in progress..._
