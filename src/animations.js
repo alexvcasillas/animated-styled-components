@@ -1,19 +1,6 @@
-import { keyframes } from 'styled-components';
+import * as BounceAnimations from './bounce/bounce';
+import * as ScaleAnimations from './scale/scale';
+import * as FadeAnimations from './fade/fade';
+import * as RotateAnimations from './rotate/rotate';
 
-export const FadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
-export const SlideInUp = keyframes`
-from {
-  transform: translateY(20px);
-}
-to {
-  transform: translateY(0);
-}
-`;
+export { BounceAnimations, ScaleAnimations, FadeAnimations, RotateAnimations };
