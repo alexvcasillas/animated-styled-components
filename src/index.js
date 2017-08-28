@@ -4,7 +4,8 @@ import {
   FadeAnimations,
   BounceAnimations,
   ScaleAnimations,
-  RotateAnimations
+  RotateAnimations,
+  SlideAnimations
 } from './animations';
 
 const Wrapper = styled.div`
@@ -22,4 +23,10 @@ const Animated = ({ children, duration, animation, iteration }) =>
   </Wrapper>;
 
 export default Animated;
-export { FadeAnimations, BounceAnimations, ScaleAnimations, RotateAnimations };
+export {
+  FadeAnimations,
+  BounceAnimations,
+  ScaleAnimations,
+  RotateAnimations,
+  SlideAnimations
+};
