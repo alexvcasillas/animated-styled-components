@@ -102,3 +102,57 @@ An array of objects that must contain the following structure:
 * `to`: This property will define the ending values of the properties to transition. This property must be an object with the following inner properties:
   * `property`: This property must be a valid CSS property (it will be checked to avoid using unknown properties).
   * `value`: This property must be a string or a number depending on the property type (will be automatically checked to prevent inconsistencies).
+
+
+### Animations
+
+This component gives you a lot of built-in animations that are well tested and ready to be used.
+
+If you want to use our built-in animations you only need to to the following when importing `animated-styled-components`:
+
+`{ AnimationsType } from 'animated-styled-components';`
+
+Where **AnimationsType** are one of the following avaible grouped animations. Each of this groups have the animations.
+
+`BounceAnimations`
+
+With the following implemented animations:
+
+`BounceInForwards`
+
+---
+
+`ScaleAnimations`
+
+With the following implemented animations:
+
+`ScaleInCenter`
+
+---
+
+`FadeAnimations`
+
+With the following implemented animations:
+
+`FadeIn`
+`FadeInTop`
+`FadeOutTop`
+`FadeInBottom`
+`FadeInLeft`
+`FadeInRight`
+
+---
+
+`RotateAnimations`
+
+With the following implemented animations:
+
+`RotateInCenter`
+
+---
+
+`SlideAnimations`
+
+With the following implemented animations:
+
+`SlideTop`
