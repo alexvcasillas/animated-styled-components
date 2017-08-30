@@ -46,6 +46,10 @@ class Animated extends Component {
           });
         }, context.calculateDelayInTime(animation));
       })(this);
+    } else {
+      this.setState(function(state, props) {
+        return { transite_in: true };
+      });
     }
     // Check if we have an out animation
     if (this.haveAnimationOut(animation)) {
