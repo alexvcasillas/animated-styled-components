@@ -80,12 +80,9 @@ class Demo extends Component {
       >
         <Animated
           animation={{
-            delay_in: 5,
-            in: FadeAnimations.FadeInBottom,
-            duration_in: 1,
+            delay_out: 5,
             out: FadeAnimations.FadeOutTop,
-            duration_out: 1,
-            delay_between: 5
+            duration_out: 1
           }}
           transitions={[
             {

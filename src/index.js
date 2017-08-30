@@ -33,43 +33,84 @@ class Animated extends Component {
     this.validateAnimation(animation);
     // Validate Transitions
     this.validateTransitions(transitions);
-    // Check if we have a delay in
-    if (this.haveDelayIn(animation)) {
-      /**
-       * If we have it, we need to transite the element
-       * from not showing to showing and playing the animation
-       */
-      (function(context) {
-        setTimeout(function() {
-          context.setState(function(state, props) {
-            return { transite_in: true };
-          });
-        }, context.calculateDelayInTime(animation));
-      })(this);
-    } else {
+
+    // Have animation in but not animation out
+    if (this.haveAnimationIn(animation) && !this.haveAnimationOut(animation)) {
+      // Do we have a delay in for the animation?
+      if (this.haveDelayIn(animation)) {
+        // Wait untill the delay time has gone
+        this.triggerDelayedTransiteInAnimation(animation);
+      } else {
+        // We don't have a delay in so we transite in immediately
+        this.setState(function(state, props) {
+          return { transite_in: true };
+        });
+      }
+    }
+
+    // Not have animation in but have animation out
+    if (!this.haveAnimationIn(animation) && this.haveAnimationOut(animation)) {
+      // We don't have a delay in so we transite in immediately
       this.setState(function(state, props) {
         return { transite_in: true };
       });
+      // Do we have a delay out for the animation?
+      if (this.haveDelayOut(animation)) {
+        // Wait untill the delay time has gone
+        this.triggerDelayedTransiteOutAnimation(animation);
+      }
     }
-    // Check if we have an out animation
-    if (this.haveAnimationOut(animation)) {
-      /**
-       * If we have it, we calculate the time to exit and
-       * update the state to trigger the out animation
-       * when the time is done
-       */
-      (function(context) {
-        setTimeout(function() {
-          context.setState(function(state, props) {
-            return { transite_out: true };
-          });
-        }, context.calculateTimeToExit(animation));
-      })(this);
+
+    // We have both types of animations
+    if (this.haveAnimationIn(animation) && this.haveAnimationOut(animation)) {
+      console.log('Both animations');
+      // Do we have a delay in for the animation?
+      if (this.haveDelayIn(animation)) {
+        console.log('Have Delay In');
+        // Wait untill the delay time has gone
+        this.triggerDelayedTransiteInAnimation(animation);
+      } else {
+        console.log(`Don't have a delay in`);
+        // We don't have a delay in so we transite in immediately
+        this.setState(function(state, props) {
+          return { transite_in: true };
+        });
+      }
+      this.triggerDelayedTransiteOutAnimation(animation);
     }
   }
 
+  waitUntill = amount =>
+    new Promise((resolve, reject) => {
+      setTimeout(resolve, amount);
+    });
+
+  triggerDelayedTransiteInAnimation = animation => {
+    this.waitUntill(this.calculateDelayInTime(animation)).then(() => {
+      this.setState(function(state, props) {
+        return { transite_in: true };
+      });
+    });
+  };
+
+  triggerDelayedTransiteOutAnimation = animation => {
+    this.waitUntill(this.calculateDelayOutTime(animation)).then(() => {
+      this.setState(function(state, props) {
+        return { transite_out: true };
+      });
+    });
+  };
+
   haveDelayIn = animation => {
     return 'delay_in' in animation;
+  };
+
+  haveDelayOut = animation => {
+    return 'delay_out' in animation;
+  };
+
+  haveAnimationIn = animation => {
+    return 'in' in animation;
   };
 
   haveAnimationOut = animation => {
@@ -78,6 +119,10 @@ class Animated extends Component {
 
   calculateDelayInTime = animation => {
     return animation.delay_in * 1000;
+  };
+
+  calculateDelayOutTime = animation => {
+    return animation.delay_out * 1000;
   };
 
   calculateTimeToExit = animation => {
@@ -135,7 +180,12 @@ class Animated extends Component {
           );
         }
       }
-      // Check if there's a delay in before animating
+    } else {
+      if ('delay_between' in animation) {
+        throw new TypeError(
+          `You cannot have a delay between in and out animations if you're missing any of them`
+        );
+      }
     }
     // Check of an out animation
     if ('out' in animation) {
@@ -143,6 +193,12 @@ class Animated extends Component {
       if (!('duration_out' in animation)) {
         throw new TypeError(
           'If you have an out animation you need to specify a duration for that animation'
+        );
+      }
+    } else {
+      if ('delay_between' in animation) {
+        throw new TypeError(
+          `You cannot have a delay between in and out animations if you're missing any of them`
         );
       }
     }
