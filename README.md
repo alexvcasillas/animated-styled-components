@@ -1,6 +1,6 @@
 ### Animated Styled Components
 
-![https://raw.githubusercontent.com/alexvcasillas/animated-styled-components/master/logotype/animated-styled-components-logo.jpg](Animated Styled Components Logotype)
+![Animated Styled Components Logotype](https://raw.githubusercontent.com/alexvcasillas/animated-styled-components/master/logotype/animated-styled-components-logo.jpg)
 
 React Animated Styled Components is a work in progress project that aims to make 
 ease to use plug and play animated components.
