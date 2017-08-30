@@ -22,11 +22,12 @@ class Showcase extends Component {
       <div>
         <Animated
           animation={{
+            delay_in: 5,
             in: FadeAnimations.FadeInBottom,
             duration_in: 1,
             out: FadeAnimations.FadeOutTop,
             duration_out: 1,
-            delay_between: 6
+            delay_between: 5
           }}
           transitions={[
             {
@@ -45,7 +46,7 @@ class Showcase extends Component {
 
 ```
 
-At the above example you can see a basic structure of an **Animated Component**. We will dig more into all the props later of this documentation.
+At the above example you can see a basic structure of an **Animated Component**. We will dig more into all the props later on this documentation.
 
 ### Props
 
@@ -58,10 +59,11 @@ The `animation` prop is an `object` that needs to have the following structure:
 ```
 animation={{
   in: FadeAnimations.FadeInBottom,
+  delay_in: 5,
   duration_in: 1,
   out: FadeAnimations.FadeOutTop,
   duration_out: 1,
-  delay_between: 6,
+  delay_between: 5,
   iteration: 2
 }}
 ```
@@ -69,10 +71,11 @@ animation={{
 **Deconstructing the `animation` prop**
 
 * `in`: This property receives an animation keyframe that will be used to animate in the component.
+* `delay_in`: This property receives and integer and will set the time that the component will take to start being animated. While this time isn't reached, the component will be mounted but will display nothing. If this property is not setted there won't be any delay in for the component to start animating.
 * `duration_in`:  This property receives and integer greater than 0 and will set the duration in seconds for the `in` animation.
 * `out`: This property receives an animation keyframe that will be used to animate out the component.
 * `duration_out`: This property receives and integer greater than 0 and will set the duration in seconds for the `out` animation.
-* `delay_between`: This property receives and integer and geater or equals to 0 and will set the duration between the `in` and `out` animations.
+* `delay_between`: This property receives and integer geater or equals to 0 and will set the time that will wait between the `in` and `out` animations.
 * `iteration`: This property receives and integer greater than 0 or the **literal** 'infinite' and will set the amount of iterations the animation should be doing until it goes out (if it should).
 
 ### Transitions Prop
@@ -114,7 +117,7 @@ If you want to use our built-in animations you only need to to the following whe
 
 Where **AnimationsType** are one of the following avaible grouped animations. Each of this groups have the animations.
 
-`BounceAnimations`
+#### BounceAnimations
 
 With the following implemented animations:
 
@@ -122,7 +125,7 @@ With the following implemented animations:
 
 ---
 
-`ScaleAnimations`
+#### ScaleAnimations
 
 With the following implemented animations:
 
@@ -130,7 +133,7 @@ With the following implemented animations:
 
 ---
 
-`FadeAnimations`
+#### FadeAnimations
 
 With the following implemented animations:
 
@@ -143,7 +146,7 @@ With the following implemented animations:
 
 ---
 
-`RotateAnimations`
+#### RotateAnimations
 
 With the following implemented animations:
 
@@ -151,7 +154,7 @@ With the following implemented animations:
 
 ---
 
-`SlideAnimations`
+#### SlideAnimations
 
 With the following implemented animations:
 
