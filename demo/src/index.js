@@ -65,11 +65,27 @@ const AcceptAccion = styled(Action)`
 class Demo extends Component {
   render() {
     return (
-      <div style={{ padding: 40, backgroundColor: '#f1f3f5' }}>
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#f1f3f5',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
         <Animated
           animation={{
+            delay_in: 5,
             in: FadeAnimations.FadeInBottom,
-            duration_in: 1
+            duration_in: 1,
+            out: FadeAnimations.FadeOutTop,
+            duration_out: 1,
+            delay_between: 5
           }}
           transitions={[
             {
