@@ -16,12 +16,14 @@ const Wrapper = styled.div`
   animation-duration: ${({ duration }) => (duration ? `${duration}s` : '1s')};
   animation-name: ${({ animation }) =>
     animation ? animation : 'no-animation'};
+  animation-fill-mode: forwards;
   animation-iteration-count: ${({ iteration }) =>
     iteration ? iteration : '1'};
 `;
 
 class Animated extends Component {
   state = {
+    transite_in: false,
     transite_out: false
   };
   componentDidMount() {
@@ -31,6 +33,20 @@ class Animated extends Component {
     this.validateAnimation(animation);
     // Validate Transitions
     this.validateTransitions(transitions);
+    // Check if we have a delay in
+    if (this.haveDelayIn(animation)) {
+      /**
+       * If we have it, we need to transite the element
+       * from not showing to showing and playing the animation
+       */
+      (function(context) {
+        setTimeout(function() {
+          context.setState(function(state, props) {
+            return { transite_in: true };
+          });
+        }, context.calculateDelayInTime(animation));
+      })(this);
+    }
     // Check if we have an out animation
     if (this.haveAnimationOut(animation)) {
       /**
@@ -48,12 +64,23 @@ class Animated extends Component {
     }
   }
 
+  haveDelayIn = animation => {
+    return 'delay_in' in animation;
+  };
+
   haveAnimationOut = animation => {
     return 'out' in animation;
   };
 
+  calculateDelayInTime = animation => {
+    return animation.delay_in * 1000;
+  };
+
   calculateTimeToExit = animation => {
-    return (animation.duration_in + animation.delay_between) * 1000;
+    return (
+      (animation.delay_in + animation.duration_in + animation.delay_between) *
+      1000
+    );
   };
 
   checkForValidCSSProperty = property => {
@@ -104,6 +131,7 @@ class Animated extends Component {
           );
         }
       }
+      // Check if there's a delay in before animating
     }
     // Check of an out animation
     if ('out' in animation) {
@@ -191,8 +219,8 @@ class Animated extends Component {
 
   render() {
     const { children, animation } = this.props;
-    const { transite_out } = this.state;
-    return (
+    const { transite_out, transite_in } = this.state;
+    return transite_in ? (
       <Wrapper
         animation={!transite_out ? animation.in : animation.out}
         duration={
@@ -202,7 +230,18 @@ class Animated extends Component {
       >
         {children}
       </Wrapper>
-    );
+    ) : null;
+    // return (
+    //   <Wrapper
+    //     animation={!transite_out ? animation.in : animation.out}
+    //     duration={
+    //       !transite_out ? animation.duration_in : animation.duration_out
+    //     }
+    //     iteration={animation.iteration}
+    //   >
+    //     {children}
+    //   </Wrapper>
+    // );
   }
 }
 

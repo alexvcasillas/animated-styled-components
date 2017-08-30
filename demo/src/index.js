@@ -9,11 +9,12 @@ class Demo extends Component {
       <div>
         <Animated
           animation={{
+            delay_in: 5,
             in: FadeAnimations.FadeInBottom,
             duration_in: 1,
             out: FadeAnimations.FadeOutTop,
             duration_out: 1,
-            delay_between: 6
+            delay_between: 5
           }}
           transitions={[
             {
