@@ -8,7 +8,7 @@ import {
   RotateAnimations,
   SlideAnimations
 } from './animations';
-import CSSProperties from './css-specs/properties.json';
+import CSSProperties from './css-properties';
 import { transitionTypes } from './type-transitions';
 
 const Wrapper = styled.div`
