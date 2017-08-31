@@ -1,6 +1,6 @@
 {
   "name": "animated-styled-components",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "React Animated Styled Components",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,6 +33,6 @@
   "license": "MIT",
   "repository": "https://github.com/alexvcasillas/animated-styled-components",
   "keywords": [
-    "react, animation, animated, styled-components, react-component, keyframes, alexvcasillas, react-animations, animated-styled-components, animated-component"
+    "react, animation, animated, animations, styled-components, react-component, keyframes, alexvcasillas, react-animations, animated-styled-components, animated-component"
   ]
 }

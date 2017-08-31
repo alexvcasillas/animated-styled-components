@@ -16,7 +16,7 @@ To make use of the **Animated** component all you need is to include the library
 ```
 import React, { Component } from 'react';
 // Make the import into your react component file
-import Animated, { FadeAnimations } from 'animated-styled-components';
+import Animated, { FadeAnimations, RotateAnimations } from 'animated-styled-components';
 
 class Showcase extends Component {
   render() {
@@ -27,6 +27,8 @@ class Showcase extends Component {
             delay_in: 5,
             in: FadeAnimations.FadeInBottom,
             duration_in: 1,
+            continuous: RotateAnimations.RotateCenter,
+            duration_continuous: 1,
             out: FadeAnimations.FadeOutTop,
             duration_out: 1,
             delay_between: 5
@@ -60,13 +62,15 @@ The `animation` prop is an `object` that needs to have the following structure:
 
 ```
 animation={{
-  in: FadeAnimations.FadeInBottom,
   delay_in: 5,
+  in: FadeAnimations.FadeInBottom,
   duration_in: 1,
+  continuous: RotateAnimations.RotateCenter,
+  duration_continuous: 1,
   out: FadeAnimations.FadeOutTop,
   duration_out: 1,
   delay_between: 5,
-  iteration: 2
+  iteration: 
 }}
 ```
 
@@ -75,6 +79,8 @@ animation={{
 * `in`: This property receives an animation keyframe that will be used to animate in the component.
 * `delay_in`: This property receives and integer and will set the time that the component will take to start being animated. While this time isn't reached, the component will be mounted but will display nothing. If this property is not setted there won't be any delay in for the component to start animating.
 * `duration_in`:  This property receives and integer greater than 0 and will set the duration in seconds for the `in` animation.
+* `continuous`: This property receives an animation keyframe that will be used to animate between `in` and `out` (if proceed).
+* `duration_continuous`: This property receives an integer greater than 0 and will set the duration in seconds for the `continuous` animation.
 * `out`: This property receives an animation keyframe that will be used to animate out the component.
 * `duration_out`: This property receives and integer greater than 0 and will set the duration in seconds for the `out` animation.
 * `delay_between`: This property receives and integer geater or equals to 0 and will set the time that will wait between the `in` and `out` animations.
@@ -140,11 +146,17 @@ With the following implemented animations:
 With the following implemented animations:
 
 `FadeIn`
+
 `FadeInTop`
+
 `FadeOutTop`
+
 `FadeInBottom`
+
 `FadeInLeft`
+
 `FadeInRight`
+
 
 ---
 
@@ -153,6 +165,8 @@ With the following implemented animations:
 With the following implemented animations:
 
 `RotateInCenter`
+
+`RotateCenter`
 
 ---
 
