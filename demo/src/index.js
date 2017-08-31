@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import styled from 'styled-components';
 
-import Animated, { FadeAnimations } from '../../src';
+import Animated, { FadeAnimations, RotateAnimations } from '../../src';
 
 const Card = styled.div`
   min-width: 250px;
@@ -80,9 +80,14 @@ class Demo extends Component {
       >
         <Animated
           animation={{
-            delay_out: 5,
+            delay_in: 5,
+            in: FadeAnimations.FadeInBottom,
+            duration_in: 1,
+            continuous: RotateAnimations.RotateCenter,
+            duration_continuous: 1,
             out: FadeAnimations.FadeOutTop,
-            duration_out: 1
+            duration_out: 1,
+            delay_between: 5
           }}
           transitions={[
             {

@@ -23,10 +23,12 @@ const Wrapper = styled.div`
 
 class Animated extends Component {
   state = {
+    delay_waited: false,
     transite_in: false,
-    transite_out: false
+    transite_out: false,
+    transite_continuous: false
   };
-  componentDidMount() {
+  async componentDidMount() {
     // Retreive the props we need
     const { animation, transitions } = this.props;
     // Validate Animation
@@ -34,70 +36,172 @@ class Animated extends Component {
     // Validate Transitions
     this.validateTransitions(transitions);
 
-    // Have animation in but not animation out
-    if (this.haveAnimationIn(animation) && !this.haveAnimationOut(animation)) {
-      // Do we have a delay in for the animation?
+    // Do we have an animation in?
+    if (this.haveAnimationIn(animation)) {
+      // Do we have a delay in?
       if (this.haveDelayIn(animation)) {
-        // Wait untill the delay time has gone
-        this.triggerDelayedTransiteInAnimation(animation);
+        // Wait untill the delay in is done
+        await this.waitUntill(this.calculateDelayInTime(animation));
+        // Set the delay as waited
+        this.setDelayAsWaited();
+        // Then trigger the IN animation
+        this.triggerInAnimation();
+        // Do we have a continouos animation
+        if (this.haveAnimationContinuous(animation)) {
+          // Wait untill the duration of the IN animation is done
+          await this.waitUntill(this.calculateDurationInTime(animation));
+          // Then trigger the CONTINUOUS animation
+          this.triggerContinuousAnimation();
+          // Do we have an animation out?
+          if (this.haveAnimationOut(animation)) {
+            // Wait untill the duration between animations is done
+            await this.waitUntill(
+              this.calculateDurationDelayBetween(animation)
+            );
+            // Then trigger the OUT animation
+            this.triggerOutAnimation();
+          }
+        } else {
+          // Do we have an animation out?
+          if (this.haveAnimationOut(animation)) {
+            // Wait untill the duration between animations is done
+            await this.waitUntill(
+              this.calculateDurationDelayBetween(animation)
+            );
+            // Then trigger the OUT animation
+            this.triggerOutAnimation();
+          }
+        }
       } else {
-        // We don't have a delay in so we transite in immediately
-        this.setState(function(state, props) {
-          return { transite_in: true };
-        });
+        // We don't have a delay in so we set the delay as waited
+        this.setDelayAsWaited();
+        // Then we trigger the IN animation
+        this.triggerInAnimation();
+        // Do we have a continouos animation?
+        if (this.haveAnimationContinuous(animation)) {
+          // Wait untill the duration of the IN animation is done
+          await this.waitUntill(this.calculateDurationInTime(animation));
+          // Then trigger the CONTINUOUS animation
+          this.triggerContinuousAnimation();
+          // Do we have an animation out?
+          if (this.haveAnimationOut(animation)) {
+            // Wait untill the duration between animations is done
+            await this.waitUntill(
+              this.calculateDurationDelayBetween(animation)
+            );
+            // Then trigger the OUT animation
+            this.triggerOutAnimation();
+          }
+        } else {
+          // Do we have an animation out?
+          if (this.haveAnimationOut(animation)) {
+            // Wait untill the duration between animations is done
+            await this.waitUntill(
+              this.calculateDurationDelayBetween(animation)
+            );
+            // Then trigger the OUT animation
+            this.triggerOutAnimation();
+          }
+        }
       }
-    }
-
-    // Not have animation in but have animation out
-    if (!this.haveAnimationIn(animation) && this.haveAnimationOut(animation)) {
-      // We don't have a delay in so we transite in immediately
-      this.setState(function(state, props) {
-        return { transite_in: true };
-      });
-      // Do we have a delay out for the animation?
-      if (this.haveDelayOut(animation)) {
-        // Wait untill the delay time has gone
-        this.triggerDelayedTransiteOutAnimation(animation);
-      }
-    }
-
-    // We have both types of animations
-    if (this.haveAnimationIn(animation) && this.haveAnimationOut(animation)) {
-      console.log('Both animations');
-      // Do we have a delay in for the animation?
-      if (this.haveDelayIn(animation)) {
-        console.log('Have Delay In');
-        // Wait untill the delay time has gone
-        this.triggerDelayedTransiteInAnimation(animation);
+    } else {
+      // We don't have an IN animation so we set the delay as waited
+      this.setDelayAsWaited();
+      // Trigger the animation IN even it's not going to be shown
+      this.triggerInAnimation();
+      // Do we have a continous animation?
+      if (this.haveAnimationContinuous(animation)) {
+        // Trigger directly the continuous animation
+        this.triggerDirectContinuousAnimation();
+        // Do we have an animation out?
+        if (this.haveAnimationOut(animation)) {
+          // Wait untill the duration between animations is done
+          await this.waitUntill(this.calculateDelayOutTime(animation));
+          // Then trigger the OUT animation
+          this.triggerOutAnimation();
+          console.log('Out animation triggered after delay out');
+        }
       } else {
-        console.log(`Don't have a delay in`);
-        // We don't have a delay in so we transite in immediately
-        this.setState(function(state, props) {
-          return { transite_in: true };
-        });
+        // Do we have an animation out?
+        if (this.haveAnimationOut(animation)) {
+          // Wait untill the duration between animations is done
+          await this.waitUntill(this.calculateDelayOutTime(animation));
+          // Then trigger the OUT animation
+          this.triggerOutAnimation();
+          console.log('Out animation triggered after delay out');
+        }
       }
-      this.triggerDelayedTransiteOutAnimation(animation);
     }
   }
 
   waitUntill = amount =>
     new Promise((resolve, reject) => {
-      setTimeout(resolve, amount);
+      setTimeout(function() {
+        return resolve();
+      }, amount);
     });
 
   triggerDelayedTransiteInAnimation = animation => {
-    this.waitUntill(this.calculateDelayInTime(animation)).then(() => {
-      this.setState(function(state, props) {
+    return this.waitUntill(this.calculateDelayInTime(animation)).then(() => {
+      return this.setState(function(state, props) {
         return { transite_in: true };
       });
     });
   };
 
   triggerDelayedTransiteOutAnimation = animation => {
-    this.waitUntill(this.calculateDelayOutTime(animation)).then(() => {
+    return this.waitUntill(this.calculateDelayOutTime(animation)).then(() => {
       this.setState(function(state, props) {
         return { transite_out: true };
       });
+    });
+  };
+
+  triggerDelayedTransiteOutAnimationWithInAnimation = animation => {
+    return this.waitUntill(
+      this.calculateTimeToExitWithInAnimation(animation)
+    ).then(() => {
+      this.setState(function(state, props) {
+        return { transite_out: true };
+      });
+    });
+  };
+
+  triggerInAnimation = () => {
+    return this.setState(function(state, props) {
+      return { transite_in: true };
+    });
+  };
+
+  triggerOutAnimation = () => {
+    return this.setState(function(state, props) {
+      return { transite_out: true, transite_continuous: false };
+    });
+  };
+
+  triggerContinuousAnimation = () => {
+    return this.setState(function(state, props) {
+      return { transite_continuous: true };
+    });
+  };
+
+  triggerDirectContinuousAnimation = () => {
+    return this.setState(function(state, props) {
+      return { transite_in: true, transite_continuous: true };
+    });
+  };
+
+  triggerContinuousAfterInAnimation = animation => {
+    return this.waitUntill(animation.duration_in).then(() => {
+      return this.setState(function(state, props) {
+        return { transite_continuous: true };
+      });
+    });
+  };
+
+  setDelayAsWaited = () => {
+    return this.setState(function(state, props) {
+      return { delay_waited: true };
     });
   };
 
@@ -117,6 +221,10 @@ class Animated extends Component {
     return 'out' in animation;
   };
 
+  haveAnimationContinuous = animation => {
+    return 'continuous' in animation;
+  };
+
   calculateDelayInTime = animation => {
     return animation.delay_in * 1000;
   };
@@ -125,7 +233,23 @@ class Animated extends Component {
     return animation.delay_out * 1000;
   };
 
-  calculateTimeToExit = animation => {
+  calculateDurationInTime = animation => {
+    return animation.duration_in * 1000;
+  };
+
+  calculateDurationContinousTime = animation => {
+    return animation.duration_continuous * 1000;
+  };
+
+  calculateDurationOutTime = animation => {
+    return animation.duration_out * 1000;
+  };
+
+  calculateDurationDelayBetween = animation => {
+    return animation.delay_between * 1000;
+  };
+
+  calculateTimeToExitWithInAnimation = animation => {
     return (
       (animation.delay_in + animation.duration_in + animation.delay_between) *
       1000
@@ -217,6 +341,21 @@ class Animated extends Component {
         );
       }
     }
+    // Check for a continuous animation
+    if ('continuous' in animation) {
+      if ('duration_continuous' in animation) {
+        // Check for Valid Animation Duration In
+        if (!this.checkForValidDuration(animation.duration_continuous)) {
+          throw new TypeError(
+            `${animation.duration_continuous} is not a valid duration for a continuous animation`
+          );
+        }
+      } else {
+        throw new TypeError(
+          `${animation.duration_out} is not a valid duration out for an animation`
+        );
+      }
+    }
   };
 
   validateTransitions = transitions => {
@@ -277,31 +416,54 @@ class Animated extends Component {
     });
   };
 
+  getCurrentAnimation = () => {
+    const { animation } = this.props;
+    const { transite_out, transite_in, transite_continuous } = this.state;
+
+    return transite_in && !transite_continuous && !transite_out
+      ? animation.in
+      : transite_in && transite_continuous
+        ? animation.continuous
+        : ((transite_in && !transite_continuous) ||
+            (!transite_in && !transite_continuous)) &&
+          transite_out
+          ? animation.out
+          : null;
+  };
+
+  getCurrentDuration = () => {
+    const { animation } = this.props;
+    const { transite_out, transite_in, transite_continuous } = this.state;
+    return transite_in
+      ? animation.duration_in
+      : transite_continuous
+        ? animation.duration_continuous
+        : transite_out ? animation.duration_out : null;
+  };
+
+  getCurrentIteration = () => {
+    const { animation } = this.props;
+    const { transite_out, transite_in, transite_continuous } = this.state;
+    return transite_continuous ? 'infinite' : animation.iteration;
+  };
+
   render() {
     const { children, animation } = this.props;
-    const { transite_out, transite_in } = this.state;
-    return transite_in ? (
+    const {
+      delay_waited,
+      transite_out,
+      transite_in,
+      transite_continuous
+    } = this.state;
+    return delay_waited ? (
       <Wrapper
-        animation={!transite_out ? animation.in : animation.out}
-        duration={
-          !transite_out ? animation.duration_in : animation.duration_out
-        }
-        iteration={animation.iteration}
+        animation={this.getCurrentAnimation()}
+        duration={this.getCurrentDuration()}
+        iteration={this.getCurrentIteration()}
       >
         {children}
       </Wrapper>
     ) : null;
-    // return (
-    //   <Wrapper
-    //     animation={!transite_out ? animation.in : animation.out}
-    //     duration={
-    //       !transite_out ? animation.duration_in : animation.duration_out
-    //     }
-    //     iteration={animation.iteration}
-    //   >
-    //     {children}
-    //   </Wrapper>
-    // );
   }
 }
 
