@@ -9,5 +9,13 @@ export const RotateInCenter = keyframes`
    transform: rotate(0);
    opacity: 1;
  }
+`;
 
+export const RotateCenter = keyframes`
+0% {
+  transform: rotate(-360deg);
+}
+100% {
+  transform: rotate(0);
+}
 `;
