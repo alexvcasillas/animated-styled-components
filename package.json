@@ -14,19 +14,11 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "styled-components": "^2.1.2"
-  },
-  "peerDependencies": {
     "react": "^15.6.1",
     "styled-components": "^2.1.2"
   },
   "devDependencies": {
-    "nwb": "0.18.x",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "styled-components": "^2.1.2"
+    "nwb": "0.18.x"
   },
   "author": "Alex Casillas <alexvcasillas@gmail.com>",
   "homepage": "https://alexvcasillas.com",
