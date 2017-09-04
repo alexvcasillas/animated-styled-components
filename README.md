@@ -129,7 +129,29 @@ Where **AnimationsType** are one of the following avaible grouped animations. Ea
 
 With the following implemented animations:
 
+`BounceInTop`
+
+`BounceOutTop`
+
+`BounceInRight`
+
+`BounceOutRight`
+
+`BounceInBottom`
+
+`BounceOutBottom`
+
+`BounceInLeft`
+
+`BounceOutLeft`
+
 `BounceInForwards`
+
+`BounceOutForwards`
+
+`BounceInBackwards`
+
+`BounceOutBackwards`
 
 ---
 
@@ -139,6 +161,64 @@ With the following implemented animations:
 
 `ScaleInCenter`
 
+`ScaleOutCenter`
+
+`ScaleInBottomLeft`
+
+`ScaleOutBottomLeft`
+
+`ScaleInVerticalCenter`
+
+`ScaleOutVerticalCenter`
+
+`ScaleInTop`
+
+`ScaleOutTop`
+
+`ScaleInLeft`
+
+`ScaleOutLeft`
+
+`ScaleInVerticalTop`
+
+`ScaleOutVerticalTop`
+
+`ScaleInTopRight`
+
+`ScaleOutTopRight`
+
+`ScaleInTopLeft`
+
+`ScaleOutTopLeft`
+
+`ScaleInVerticalBottom`
+
+`ScaleOutVerticalBottom`
+
+`ScaleInRight`
+
+`ScaleOutRight`
+
+`ScaleInHorizontalCenter`
+
+`ScaleOutHorizontalCenter`
+
+`ScaleInBottomRight`
+
+`ScaleOutBottomRight`
+
+`ScaleInHorizontalLeft`
+
+`ScaleOutHorizontalLeft`
+
+`ScaleInBottom`
+
+`ScaleOutBottom`
+
+`ScaleInHorizontalRight`
+
+`ScaleOutHorizontalRight`
+
 ---
 
 #### FadeAnimations
@@ -147,16 +227,47 @@ With the following implemented animations:
 
 `FadeIn`
 
+`FadeOut`
+
 `FadeInTop`
 
 `FadeOutTop`
 
 `FadeInBottom`
 
+`FadeOutBottom`
+
 `FadeInLeft`
+
+`FadeOutLeft`
 
 `FadeInRight`
 
+`FadeOutRight`
+
+`FadeInForwards`
+
+`FadeOutForwards`
+
+`FadeInBackwards`
+
+`FadeOutBackwards`
+
+`FadeInBottomLeft`
+
+`FadeOutBottomLeft`
+
+`FadeInBottomRight`
+
+`FadeOutBottomRight`
+
+`FadeInTopLeft`
+
+`FadeOutTopLeft`
+
+`FadeInTopRight`
+
+`FadeOutTopRight`
 
 ---
 
@@ -166,7 +277,69 @@ With the following implemented animations:
 
 `RotateInCenter`
 
-`RotateCenter`
+`RotateOutCenter`
+
+`RotateInBottomLeft`
+
+`RotateOutBottomLeft`
+
+`RotateInTop`
+
+`RotateOutTop`
+
+`RotateInLeft`
+
+`RotateOutLeft`
+
+`RotateInTopRight`
+
+`RotateOutTopRight`
+
+`RotateInTopLeft`
+
+`RotateOutTopLeft`
+
+`RotateInRight`
+
+`RotateOutRight`
+
+`RotateInHorizontal`
+
+`RotateOutHorizontal`
+
+`RotateInBottomRight`
+
+`RotateInVertical`
+
+`RotateOutVertical`
+
+`RotateInBottom`
+
+`RotateOutBottom`
+
+`RotateInDiagonal`
+
+`RotateOutDiagonal`
+
+`RotateInDiagonalReverse`
+
+`RotateOutDiagonalReverse`
+
+`RotateIn45Right`
+
+`RotateOut45Right`
+
+`RotateIn45Left`
+
+`RotateOut45Left`
+
+`RotateInForwards`
+
+`RotateOutForwards`
+
+`RotateInBackwards`
+
+`RotateOutBackwards`
 
 ---
 
@@ -174,4 +347,34 @@ With the following implemented animations:
 
 With the following implemented animations:
 
-`SlideTop`
+`SlideInTop`
+
+`SlideOutTop`
+
+`SlideInLeft`
+
+`SlideOutLeft`
+
+`SlideInTopRight`
+
+`SlideOutTopRight`
+
+`SlideInTopleft`
+
+`SlideOutTopLeft`
+
+`SlideInRight`
+
+`SlideOutRight`
+
+`SlideInBottomRight`
+
+`SlideOutBottomRight`
+
+`SlideInBottom`
+
+`SlideOutBottom`
+
+`SlideInBottomLeft`
+
+`SlideOutBottomLeft`
