@@ -80,8 +80,7 @@ class Demo extends Component {
       >
         <Animated
           animation={{
-            delay_in: 5,
-            in: FadeAnimations.FadeInBottom,
+            in: FadeAnimations.FadeInBackwards,
             duration_in: 1,
             continuous: RotateAnimations.RotateCenter,
             duration_continuous: 1,
