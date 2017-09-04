@@ -35,7 +35,7 @@ export const ScaleInBottomLeft = keyframes`
  }
 `;
 
-export ScaleOutBottomLeft = keyframes`
+export const ScaleOutBottomLeft = keyframes`
  0% {
    transform: scale(1);
    transform-origin: 0% 100%;
