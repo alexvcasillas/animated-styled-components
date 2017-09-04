@@ -31,6 +31,7 @@ class Animated extends Component {
   async componentDidMount() {
     // Retreive the props we need
     const { animation, transitions } = this.props;
+
     // Validate Animation
     this.validateAnimation(animation);
     // Validate Transitions
@@ -257,7 +258,7 @@ class Animated extends Component {
   };
 
   checkForValidCSSProperty = property => {
-    return property in CSSProperties;
+    return CSSProperties.includes(property);
   };
 
   checkForValidDuration = duration => {
