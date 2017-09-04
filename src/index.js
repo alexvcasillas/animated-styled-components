@@ -19,6 +19,25 @@ const Wrapper = styled.div`
   animation-fill-mode: forwards;
   animation-iteration-count: ${({ iteration }) =>
     iteration ? iteration : '1'};
+
+  > * {
+    ${({ transitionFrom }) =>
+      transitionFrom && transitionFrom !== '' ? transitionFrom : ''};
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      ${({ transitionTo }) =>
+        transitionTo && transitionTo !== '' ? transitionTo : ''};
+    }
+  }
+
+  &:focus {
+    ${({ transitionTo }) =>
+      transitionTo && transitionTo !== '' ? transitionTo : ''};
+  }
+
+  &:active {
+  }
 `;
 
 class Animated extends Component {
@@ -30,12 +49,12 @@ class Animated extends Component {
   };
   async componentDidMount() {
     // Retreive the props we need
-    const { animation, transitions } = this.props;
+    const { animation, transition } = this.props;
 
     // Validate Animation
     this.validateAnimation(animation);
     // Validate Transitions
-    this.validateTransitions(transitions);
+    this.validateTransitions(transition);
 
     // Do we have an animation in?
     if (this.haveAnimationIn(animation)) {
@@ -359,62 +378,58 @@ class Animated extends Component {
     }
   };
 
-  validateTransitions = transitions => {
-    // Iterate though transitions
-    transitions.forEach(transition => {
-      if (!('type' in transition)) {
-        throw new TypeError(
-          `You're missing the type of transition property. Eg: hover, focus, blur, active, ...`
-        );
-      }
-      // Check for Valid Transition Type
-      if (!this.checkForValidTransitionType(transition.type)) {
-        throw new TypeError(
-          `${transition.type} is not a valid type of transition`
-        );
-      }
-      // Check for from transition object
-      if (!('from' in transition)) {
-        throw new TypeError(
-          `You're missing the from property of the transition that sets the point to start at`
-        );
-      }
-      // Check if from object is valid and meet the requirements
-      if (!this.checkForValidFromToObject(transition.from)) {
-        throw new TypeError(
-          `${JSON.stringify(
-            transition.from
-          )} is not a valid transition FROM object. It needs to have the following structure: { property: string, value: string || Number }`
-        );
-      }
-      // Check if the from css property is valid
-      if (!this.checkForValidCSSProperty(transition.from.property)) {
-        throw new TypeError(
-          `${transition.from
-            .property} is not a valid CSS property at FROM object`
-        );
-      }
-      // Check for to transition object
-      if (!('to' in transition)) {
-        throw new TypeError(
-          `You're missing the to property of the transition that sets the point of where to end at`
-        );
-      }
-      // Check if to object is valid and meet the requirements
-      if (!this.checkForValidFromToObject(transition.to)) {
-        throw new TypeError(
-          `${JSON.stringify(
-            transition.from
-          )} is not a valid transition TO object. It needs to have the following structure: { property: string, value: string || Number }`
-        );
-      }
-      // Check if the to css property is valid
-      if (!this.checkForValidCSSProperty(transition.to.property)) {
-        throw new TypeError(
-          `${transition.from.property} is not a valid CSS property at TO object`
-        );
-      }
-    });
+  validateTransitions = transition => {
+    if (!('type' in transition)) {
+      throw new TypeError(
+        `You're missing the type of transition property. Eg: hover, focus, blur, active, ...`
+      );
+    }
+    // Check for Valid Transition Type
+    if (!this.checkForValidTransitionType(transition.type)) {
+      throw new TypeError(
+        `${transition.type} is not a valid type of transition`
+      );
+    }
+    // Check for from transition object
+    if (!('from' in transition)) {
+      throw new TypeError(
+        `You're missing the from property of the transition that sets the point to start at`
+      );
+    }
+    // Check if from object is valid and meet the requirements
+    if (!this.checkForValidFromToObject(transition.from)) {
+      throw new TypeError(
+        `${JSON.stringify(
+          transition.from
+        )} is not a valid transition FROM object. It needs to have the following structure: { property: string, value: string || Number }`
+      );
+    }
+    // Check if the from css property is valid
+    if (!this.checkForValidCSSProperty(transition.from.property)) {
+      throw new TypeError(
+        `${transition.from.property} is not a valid CSS property at FROM object`
+      );
+    }
+    // Check for to transition object
+    if (!('to' in transition)) {
+      throw new TypeError(
+        `You're missing the to property of the transition that sets the point of where to end at`
+      );
+    }
+    // Check if to object is valid and meet the requirements
+    if (!this.checkForValidFromToObject(transition.to)) {
+      throw new TypeError(
+        `${JSON.stringify(
+          transition.from
+        )} is not a valid transition TO object. It needs to have the following structure: { property: string, value: string || Number }`
+      );
+    }
+    // Check if the to css property is valid
+    if (!this.checkForValidCSSProperty(transition.to.property)) {
+      throw new TypeError(
+        `${transition.from.property} is not a valid CSS property at TO object`
+      );
+    }
   };
 
   getCurrentAnimation = () => {
@@ -448,8 +463,24 @@ class Animated extends Component {
     return transite_continuous ? 'infinite' : animation.iteration;
   };
 
+  getTransitionFrom = () => {
+    const { transition } = this.props;
+
+    return transition.type === 'hover'
+      ? `${transition.from.property}: ${transition.from.value}`
+      : '';
+  };
+
+  getTransitionTo = () => {
+    const { transition } = this.props;
+
+    return transition.type === 'hover'
+      ? `${transition.to.property}: ${transition.to.value};`
+      : '';
+  };
+
   render() {
-    const { children, animation } = this.props;
+    const { children, animation, transition } = this.props;
     const {
       delay_waited,
       transite_out,
@@ -461,6 +492,8 @@ class Animated extends Component {
         animation={this.getCurrentAnimation()}
         duration={this.getCurrentDuration()}
         iteration={this.getCurrentIteration()}
+        transitionFrom={this.getTransitionFrom()}
+        transitionTo={this.getTransitionTo()}
       >
         {children}
       </Wrapper>
@@ -470,7 +503,7 @@ class Animated extends Component {
 
 Animated.PropTypes = {
   animation: PropTypes.object,
-  transition: PropTypes.arrayOf(PropTypes.object)
+  transitions: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default Animated;

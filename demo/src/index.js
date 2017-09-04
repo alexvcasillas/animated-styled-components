@@ -81,20 +81,13 @@ class Demo extends Component {
         <Animated
           animation={{
             in: FadeAnimations.FadeInBackwards,
-            duration_in: 1,
-            continuous: RotateAnimations.RotateCenter,
-            duration_continuous: 1,
-            out: FadeAnimations.FadeOutTop,
-            duration_out: 1,
-            delay_between: 5
+            duration_in: 1
           }}
-          transitions={[
-            {
-              type: 'hover',
-              from: { property: 'border-radius', value: 0 },
-              to: { property: 'border-radius', value: 10 }
-            }
-          ]}
+          transition={{
+            type: 'hover',
+            from: { property: 'transform', value: 'scale(1) rotate(0)' },
+            to: { property: 'transform', value: 'scale(1.2) rotate(25deg)' }
+          }}
         >
           <Card>
             <Title>Animated Styled Components</Title>
