@@ -5,6 +5,10 @@
 React Animated Styled Components is a work in progress project that aims to make 
 ease to use plug and play animated components.
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/kHpsrcebN6AQb2ERfWQbVbeX/alexvcasillas/animated-styled-components'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/kHpsrcebN6AQb2ERfWQbVbeX/alexvcasillas/animated-styled-components.svg' />
+</a>
+
 ### Installing Animated Styled Components
 
 `npm i animated-styled-components`
