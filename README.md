@@ -17,7 +17,7 @@ ease to use plug and play animated components.
 
 To make use of the **Animated** component all you need is to include the library into your project and create a new component just like you would do with any other react component.
 
-```
+```js
 import React, { Component } from 'react';
 // Make the import into your react component file
 import Animated, { FadeAnimations, RotateAnimations } from 'animated-styled-components';
@@ -64,7 +64,7 @@ The **Animated Component** doesn't need to be filled with any props, if you don'
 
 The `animation` prop is an `object` that needs to have the following structure:
 
-```
+```js
 animation={{
   delay_in: 5,
   in: FadeAnimations.FadeInBottom,
@@ -96,7 +96,7 @@ animation={{
 
 The `transitions` prop is an `array` of `objects` with the desired transitions that should be handled and needs to have the following structure:
 
-```
+```js
 transitions={[
   {
     type: 'hover',
