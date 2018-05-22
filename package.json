@@ -1,6 +1,6 @@
 {
   "name": "animated-styled-components",
-  "version": "0.5.2",
+  "version": "0.5.4",
   "description": "React Animated Styled Components",
   "main": "build/animated.js",
   "scripts": {
