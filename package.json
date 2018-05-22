@@ -2,9 +2,10 @@
   "name": "animated-styled-components",
   "version": "0.5.2",
   "description": "React Animated Styled Components",
-  "main": "index.js",
+  "main": "build/animated.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "prepare": "webpack"
   },
   "keywords": [
     "react",

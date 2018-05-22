@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import Animated, { FadeAnimations } from './animated';
+import Animated, { FadeAnimations } from 'animated-styled-components';
 
 class App extends Component {
   render() {
