@@ -2,8 +2,7 @@
 
 ![Animated Styled Components Logotype](https://raw.githubusercontent.com/alexvcasillas/animated-styled-components/master/logotype/animated-styled-components-logo.jpg)
 
-React Animated Styled Components is a work in progress project that aims to make 
-ease to use plug and play animated components.
+React Animated Styled Components is a library that aims to make ease to use plug and play animated components.
 
 ### Installing Animated Styled Components
 
@@ -87,8 +86,6 @@ animation={{
 * `iteration`: This property receives and integer greater than 0 or the **literal** 'infinite' and will set the amount of iterations the animation should be doing until it goes out (if it should).
 
 ### Transitions Prop
-
-*NOTE: the validation logic of the transitions are implemented but not the transition logic itself so this will not work yet even if you pass valid data in the prop.*
 
 The `transitions` prop is an `array` of `objects` with the desired transitions that should be handled and needs to have the following structure:
 
