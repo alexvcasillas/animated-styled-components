@@ -1,11 +1,10 @@
 {
   "name": "animated-styled-components",
-  "version": "0.5.4",
+  "version": "0.6.0",
   "description": "React Animated Styled Components",
-  "main": "build/animated.js",
+  "main": "lib/animated.js",
   "scripts": {
-    "build": "webpack",
-    "prepare": "webpack"
+    "build": "microbundle --jsx React.createElement --external react,styled-components"
   },
   "keywords": [
     "react",
@@ -18,22 +17,11 @@
   "author": "Alex Casillas <alexvcasillas@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.47",
-    "@babel/core": "^7.0.0-beta.47",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.47",
-    "@babel/plugin-transform-runtime": "^7.0.0-beta.47",
-    "@babel/preset-env": "^7.0.0-beta.47",
-    "@babel/preset-react": "^7.0.0-beta.47",
-    "ava": "1.0.0-beta.4",
-    "babel-loader": "^8.0.0-beta.2",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.3"
+    "microbundle": "^0.11.0"
   },
   "peerDependencies": {
-    "react": "^16.3.2",
-    "styled-components": "^3.2.6"
+    "react": "^16.8.5",
+    "styled-components": "^4.2.0"
   },
-  "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.47"
-  }
+  "dependencies": {}
 }

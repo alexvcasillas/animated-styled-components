@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   FadeAnimations,
@@ -11,7 +11,6 @@ import CSSProperties from './css-properties';
 import { transitionTypes } from './type-transitions';
 
 const Wrapper = styled.div`
-  display: inline-block;
   animation-duration: ${({ duration }) => (duration ? `${duration}s` : '1s')};
   animation-name: ${({ animation }) =>
     animation ? animation : 'no-animation'};
@@ -39,7 +38,7 @@ const Wrapper = styled.div`
   }
 `;
 
-class Animated extends Component {
+class Animated extends React.Component {
   state = {
     delay_waited: false,
     transite_in: false,
@@ -225,50 +224,62 @@ class Animated extends Component {
   };
 
   haveDelayIn = animation => {
+    if (!animation) return;
     return 'delay_in' in animation;
   };
 
   haveDelayOut = animation => {
+    if (!animation) return;
     return 'delay_out' in animation;
   };
 
   haveAnimationIn = animation => {
+    if (!animation) return;
     return 'in' in animation;
   };
 
   haveAnimationOut = animation => {
+    if (!animation) return;
     return 'out' in animation;
   };
 
   haveAnimationContinuous = animation => {
+    if (!animation) return;
     return 'continuous' in animation;
   };
 
   calculateDelayInTime = animation => {
+    if (!animation) return;
     return animation.delay_in * 1000;
   };
 
   calculateDelayOutTime = animation => {
+    if (!animation) return;
     return animation.delay_out * 1000;
   };
 
   calculateDurationInTime = animation => {
+    if (!animation) return;
     return animation.duration_in * 1000;
   };
 
   calculateDurationContinousTime = animation => {
+    if (!animation) return;
     return animation.duration_continuous * 1000;
   };
 
   calculateDurationOutTime = animation => {
+    if (!animation) return;
     return animation.duration_out * 1000;
   };
 
   calculateDurationDelayBetween = animation => {
+    if (!animation) return;
     return animation.delay_between * 1000;
   };
 
   calculateTimeToExitWithInAnimation = animation => {
+    if (!animation) return;
     return (
       (animation.delay_in + animation.duration_in + animation.delay_between) *
       1000
@@ -299,6 +310,7 @@ class Animated extends Component {
   };
 
   validateAnimation = animation => {
+    if (!animation) return;
     // Check of an in animation
     if ('in' in animation) {
       // Check if that animation has also a duration
@@ -443,6 +455,7 @@ class Animated extends Component {
 
   getCurrentAnimation = () => {
     const { animation } = this.props;
+    if (!animation) return;
     const { transite_out, transite_in, transite_continuous } = this.state;
 
     return transite_in && !transite_continuous && !transite_out
@@ -458,6 +471,7 @@ class Animated extends Component {
 
   getCurrentDuration = () => {
     const { animation } = this.props;
+    if (!animation) return;
     const { transite_out, transite_in, transite_continuous } = this.state;
     return transite_in
       ? animation.duration_in
@@ -470,6 +484,7 @@ class Animated extends Component {
 
   getCurrentIteration = () => {
     const { animation } = this.props;
+    if (!animation) return;
     const { transite_out, transite_in, transite_continuous } = this.state;
     return transite_continuous ? 'infinite' : animation.iteration;
   };
@@ -512,8 +527,8 @@ class Animated extends Component {
   }
 }
 
-export default Animated;
 export {
+  Animated,
   FadeAnimations,
   BounceAnimations,
   ScaleAnimations,
