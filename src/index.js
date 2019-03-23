@@ -400,6 +400,7 @@ class Animated extends React.Component {
   };
 
   validateTransitions = transition => {
+    if (!transition) return;
     if (!('type' in transition)) {
       throw new TypeError(
         `You're missing the type of transition property. Eg: hover, focus, blur, active, ...`
@@ -491,7 +492,7 @@ class Animated extends React.Component {
 
   getTransitionFrom = () => {
     const { transition } = this.props;
-
+    if (!transition) return;
     return transition.type === 'hover'
       ? `${transition.from.property}: ${transition.from.value}`
       : '';
@@ -499,7 +500,7 @@ class Animated extends React.Component {
 
   getTransitionTo = () => {
     const { transition } = this.props;
-
+    if (!transition) return;
     return transition.type === 'hover'
       ? `${transition.to.property}: ${transition.to.value};`
       : '';

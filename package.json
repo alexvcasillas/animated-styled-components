@@ -4,7 +4,8 @@
   "description": "React Animated Styled Components",
   "main": "lib/animated.js",
   "scripts": {
-    "build": "microbundle --jsx React.createElement --external react,styled-components"
+    "build": "microbundle --jsx React.createElement --external react,styled-components",
+    "prepare": "yarn build"
   },
   "keywords": [
     "react",
