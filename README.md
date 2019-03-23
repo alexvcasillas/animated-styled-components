@@ -100,8 +100,6 @@ animation={{
 
 ### Transitions Prop
 
-*NOTE: the validation logic of the transitions are implemented but not the transition logic itself so this will not work yet even if you pass valid data in the prop.*
-
 The `transitions` prop is an `array` of `objects` with the desired transitions that should be handled and needs to have the following structure:
 
 ```
