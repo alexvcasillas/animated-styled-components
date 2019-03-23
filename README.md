@@ -1,21 +1,34 @@
 ### Animated Styled Components
 
-![Animated Styled Components Logotype](https://raw.githubusercontent.com/alexvcasillas/animated-styled-components/master/logotype/animated-styled-components-logo.jpg)
-
 React Animated Styled Components is a library that aims to make ease to use plug and play animated components.
 
 ### Installing Animated Styled Components
 
-`npm i animated-styled-components`
+NPM
+
+```
+npm i --save animated-styled-components
+```
+
+YARN
+
+```
+yarn add animated-styled-components
+```
+
+### Demo
+
+You can check for a working [CodeSandbox](https://codesandbox.io/s/1o4n5765rj) to see a small demonstration of this library.
+
 
 ### Using the Animated Component
 
-To make use of the **Animated** component all you need is to include the library into your project and create a new component just like you would do with any other react component.
+To make use of the **Animated** component you need to include the library into your project and create a new component just like you would do with any other react component.
 
-```js
+```
 import React, { Component } from 'react';
 // Make the import into your react component file
-import Animated, { FadeAnimations, RotateAnimations } from 'animated-styled-components';
+import { Animated, FadeAnimations, RotateAnimations } from 'animated-styled-components';
 
 class Showcase extends Component {
   render() {
@@ -59,7 +72,7 @@ The **Animated Component** doesn't need to be filled with any props, if you don'
 
 The `animation` prop is an `object` that needs to have the following structure:
 
-```js
+```
 animation={{
   delay_in: 5,
   in: FadeAnimations.FadeInBottom,
@@ -87,9 +100,11 @@ animation={{
 
 ### Transitions Prop
 
+*NOTE: the validation logic of the transitions are implemented but not the transition logic itself so this will not work yet even if you pass valid data in the prop.*
+
 The `transitions` prop is an `array` of `objects` with the desired transitions that should be handled and needs to have the following structure:
 
-```js
+```
 transitions={[
   {
     type: 'hover',
@@ -126,29 +141,7 @@ Where **AnimationsType** are one of the following avaible grouped animations. Ea
 
 With the following implemented animations:
 
-`BounceInTop`
-
-`BounceOutTop`
-
-`BounceInRight`
-
-`BounceOutRight`
-
-`BounceInBottom`
-
-`BounceOutBottom`
-
-`BounceInLeft`
-
-`BounceOutLeft`
-
 `BounceInForwards`
-
-`BounceOutForwards`
-
-`BounceInBackwards`
-
-`BounceOutBackwards`
 
 ---
 
@@ -158,64 +151,6 @@ With the following implemented animations:
 
 `ScaleInCenter`
 
-`ScaleOutCenter`
-
-`ScaleInBottomLeft`
-
-`ScaleOutBottomLeft`
-
-`ScaleInVerticalCenter`
-
-`ScaleOutVerticalCenter`
-
-`ScaleInTop`
-
-`ScaleOutTop`
-
-`ScaleInLeft`
-
-`ScaleOutLeft`
-
-`ScaleInVerticalTop`
-
-`ScaleOutVerticalTop`
-
-`ScaleInTopRight`
-
-`ScaleOutTopRight`
-
-`ScaleInTopLeft`
-
-`ScaleOutTopLeft`
-
-`ScaleInVerticalBottom`
-
-`ScaleOutVerticalBottom`
-
-`ScaleInRight`
-
-`ScaleOutRight`
-
-`ScaleInHorizontalCenter`
-
-`ScaleOutHorizontalCenter`
-
-`ScaleInBottomRight`
-
-`ScaleOutBottomRight`
-
-`ScaleInHorizontalLeft`
-
-`ScaleOutHorizontalLeft`
-
-`ScaleInBottom`
-
-`ScaleOutBottom`
-
-`ScaleInHorizontalRight`
-
-`ScaleOutHorizontalRight`
-
 ---
 
 #### FadeAnimations
@@ -224,47 +159,16 @@ With the following implemented animations:
 
 `FadeIn`
 
-`FadeOut`
-
 `FadeInTop`
 
 `FadeOutTop`
 
 `FadeInBottom`
 
-`FadeOutBottom`
-
 `FadeInLeft`
-
-`FadeOutLeft`
 
 `FadeInRight`
 
-`FadeOutRight`
-
-`FadeInForwards`
-
-`FadeOutForwards`
-
-`FadeInBackwards`
-
-`FadeOutBackwards`
-
-`FadeInBottomLeft`
-
-`FadeOutBottomLeft`
-
-`FadeInBottomRight`
-
-`FadeOutBottomRight`
-
-`FadeInTopLeft`
-
-`FadeOutTopLeft`
-
-`FadeInTopRight`
-
-`FadeOutTopRight`
 
 ---
 
@@ -274,69 +178,7 @@ With the following implemented animations:
 
 `RotateInCenter`
 
-`RotateOutCenter`
-
-`RotateInBottomLeft`
-
-`RotateOutBottomLeft`
-
-`RotateInTop`
-
-`RotateOutTop`
-
-`RotateInLeft`
-
-`RotateOutLeft`
-
-`RotateInTopRight`
-
-`RotateOutTopRight`
-
-`RotateInTopLeft`
-
-`RotateOutTopLeft`
-
-`RotateInRight`
-
-`RotateOutRight`
-
-`RotateInHorizontal`
-
-`RotateOutHorizontal`
-
-`RotateInBottomRight`
-
-`RotateInVertical`
-
-`RotateOutVertical`
-
-`RotateInBottom`
-
-`RotateOutBottom`
-
-`RotateInDiagonal`
-
-`RotateOutDiagonal`
-
-`RotateInDiagonalReverse`
-
-`RotateOutDiagonalReverse`
-
-`RotateIn45Right`
-
-`RotateOut45Right`
-
-`RotateIn45Left`
-
-`RotateOut45Left`
-
-`RotateInForwards`
-
-`RotateOutForwards`
-
-`RotateInBackwards`
-
-`RotateOutBackwards`
+`RotateCenter`
 
 ---
 
@@ -344,34 +186,4 @@ With the following implemented animations:
 
 With the following implemented animations:
 
-`SlideInTop`
-
-`SlideOutTop`
-
-`SlideInLeft`
-
-`SlideOutLeft`
-
-`SlideInTopRight`
-
-`SlideOutTopRight`
-
-`SlideInTopleft`
-
-`SlideOutTopLeft`
-
-`SlideInRight`
-
-`SlideOutRight`
-
-`SlideInBottomRight`
-
-`SlideOutBottomRight`
-
-`SlideInBottom`
-
-`SlideOutBottom`
-
-`SlideInBottomLeft`
-
-`SlideOutBottomLeft`
+`SlideTop`
