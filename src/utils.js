@@ -12,7 +12,7 @@ export const validateAnimation = animation => {
       );
     } else {
       // Check for Valid Animation Duration In
-      if (!this.checkForValidDuration(animation.duration_in)) {
+      if (!checkForValidDuration(animation.duration_in)) {
         throw new TypeError(
           `${animation.duration_in} is not a valid duration in for an animation`
         );
@@ -21,7 +21,7 @@ export const validateAnimation = animation => {
     // Check if this in animation is going to iterate
     if ("iteration" in animation) {
       // Check for Valid Iteration
-      if (!this.checkForValidIteration(animation.iteration)) {
+      if (!checkForValidIteration(animation.iteration)) {
         throw new TypeError(
           `${
             animation.iteration
@@ -60,7 +60,7 @@ export const validateAnimation = animation => {
       );
     }
     // Check for Valid Animation Duration In
-    if (!this.checkForValidDuration(animation.duration_out)) {
+    if (!checkForValidDuration(animation.duration_out)) {
       throw new TypeError(
         `${animation.duration_out} is not a valid duration out for an animation`
       );
@@ -70,7 +70,7 @@ export const validateAnimation = animation => {
   if ("continuous" in animation) {
     if ("duration_continuous" in animation) {
       // Check for Valid Animation Duration In
-      if (!this.checkForValidDuration(animation.duration_continuous)) {
+      if (!checkForValidDuration(animation.duration_continuous)) {
         throw new TypeError(
           `${
             animation.duration_continuous
@@ -93,7 +93,7 @@ export const validateTransition = transition => {
     );
   }
   // Check for Valid Transition Type
-  if (!this.checkForValidTransitionType(transition.type)) {
+  if (!checkForValidTransitionType(transition.type)) {
     throw new TypeError(`${transition.type} is not a valid type of transition`);
   }
   // Check for from transition object
@@ -103,7 +103,7 @@ export const validateTransition = transition => {
     );
   }
   // Check if from object is valid and meet the requirements
-  if (!this.checkForValidFromToObject(transition.from)) {
+  if (!checkForValidFromToObject(transition.from)) {
     throw new TypeError(
       `${JSON.stringify(
         transition.from
@@ -111,7 +111,7 @@ export const validateTransition = transition => {
     );
   }
   // Check if the from css property is valid
-  if (!this.checkForValidCSSProperty(transition.from.property)) {
+  if (!checkForValidCSSProperty(transition.from.property)) {
     throw new TypeError(
       `${transition.from.property} is not a valid CSS property at FROM object`
     );
@@ -123,7 +123,7 @@ export const validateTransition = transition => {
     );
   }
   // Check if to object is valid and meet the requirements
-  if (!this.checkForValidFromToObject(transition.to)) {
+  if (!checkForValidFromToObject(transition.to)) {
     throw new TypeError(
       `${JSON.stringify(
         transition.from
@@ -131,7 +131,7 @@ export const validateTransition = transition => {
     );
   }
   // Check if the to css property is valid
-  if (!this.checkForValidCSSProperty(transition.to.property)) {
+  if (!checkForValidCSSProperty(transition.to.property)) {
     throw new TypeError(
       `${transition.from.property} is not a valid CSS property at TO object`
     );

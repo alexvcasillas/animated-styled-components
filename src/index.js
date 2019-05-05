@@ -21,7 +21,9 @@ import {
   getCurrentAnimation,
   calculateDurationDelayBetween,
   getTransitionFrom,
-  getTransitionTo
+  getTransitionTo,
+  getCurrentDuration,
+  getCurrentIteration
 } from './utils';
 
 const Wrapper = styled.div`
@@ -52,7 +54,7 @@ const Wrapper = styled.div`
   }
 `;
 
-function Animated({ transition, animation }) {
+function Animated({ transition, animation, children }) {
   const [delayWaited, setDelayWaited] = useState(false);
   const [transiteIn, setTransiteIn] = useState(false);
   const [transiteOut, setTransiteOut] = useState(false);
@@ -69,14 +71,17 @@ function Animated({ transition, animation }) {
   useMemo(getTransitionTo, [transition])
   // TRIGGER IR ANIMATION FUNCTION
   function triggerInAnimation() {
+    console.log('Transite In');
     setTransiteIn(true);
   }
   // TRIGGER OUT ANIMATION FUNCTION
   function triggerOutAnimation() {
+    console.log('Transite Out');
     setTransiteOut(true);
   }
   // TRIGGER CONTINUOUS ANIMATION FUNCTION
   function triggerContinuousAnimation() {
+    console.log('Transite Continuous');
     setTransiteContinuous(true);
   }
   // CHECK FOR VALID ANIMATIONS & TRANSITIONS WHEN THEY CHANGE
@@ -87,6 +92,7 @@ function Animated({ transition, animation }) {
   // USE EFFECT FOR THE FIRST RENDER TO CHECK IF IT HAS INITIAL DELAY
   useEffect(() => {
     async function checkForDelayIn() {
+      console.log('Check for delay in');
       if (haveDelayIn(animation)) {
         await waitUntill(calculateDelayInTime(animation));
       }
